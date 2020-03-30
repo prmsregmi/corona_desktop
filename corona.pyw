@@ -3,7 +3,7 @@ from urllib.request import urlopen, Request
 import locale, tkinter, win32api, win32con, pywintypes
 
 width=win32api.GetSystemMetrics(0)
-width=int(width-0.12*width)
+width=int(width-0.15*width)
 
 url='https://www.worldometers.info/coronavirus/'
 
@@ -73,6 +73,6 @@ class UpdateLabel():
         final_data="Cases   Death  Recov.\n"+str(d0)+"  "+str(d1)+"  "+str(d2)+"\n"+" "+str(p0)+"%"+"   "+str(p1)+"%"+"   "+str(p2)+"%"
         
         self.var.set(final_data)
-        self.win.after(10000, self.updater)
+        self.win.after(1000, self.updater)
         
 UL=UpdateLabel()

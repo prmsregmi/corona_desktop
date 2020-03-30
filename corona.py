@@ -3,7 +3,7 @@ from urllib.request import urlopen, Request
 import locale, tkinter, win32api, win32con, pywintypes
 
 width=win32api.GetSystemMetrics(0)
-width=int(width-0.12*width)
+width=int(width-0.15*width)
 
 url='https://www.worldometers.info/coronavirus/'
 
