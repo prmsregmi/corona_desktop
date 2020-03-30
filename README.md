@@ -1,5 +1,5 @@
 # corona_desktop
-A script to automatically load corona data and 
+A script to automatically load corona data and display in your desktop.
 
 Make sure python is installed on your device.
 
