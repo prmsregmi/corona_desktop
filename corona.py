@@ -2,6 +2,9 @@ from bs4 import BeautifulSoup
 from urllib.request import urlopen, Request
 import locale, tkinter, win32api, win32con, pywintypes
 
+width=win32api.GetSystemMetrics(0)
+width=int(width-0.12*width)
+
 url='https://www.worldometers.info/coronavirus/'
 
 header= {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) ' 
@@ -19,14 +22,20 @@ class UpdateLabel():
         self.var=tkinter.StringVar()
         self.ctr=[]
         self.var.set("Fetching data...")
-        self.label = tkinter.Label(self.win, textvariable=self.var, font=('Consolas','9'), fg='red', bg='black')
+
+        # change your color here
+        self.label = tkinter.Label(self.win, textvariable=self.var, font=('Consolas','11'), fg='white', bg='black')
+        self.label.master.wm_attributes("-transparentcolor", "black")
+
         self.label.master.overrideredirect(True)        
         self.label.master.lift()
-        self.label.master.wm_attributes("-topmost", True)
-
-        self.label.master.geometry("+1100+820")
         self.label.master.wm_attributes("-disabled", True)
-        self.label.master.wm_attributes("-transparentcolor", "black")
+        res="+"+str(width)+"+"+str(0)
+        self.label.master.geometry(res)
+
+        # if you want always on top, uncomment this line
+        # self.label.master.wm_attributes("-topmost", True)
+        
 
         hWindow = pywintypes.HANDLE(int(self.label.master.frame(), 16))
         exStyle = win32con.WS_EX_COMPOSITED | win32con.WS_EX_LAYERED | win32con.WS_EX_NOACTIVATE | win32con.WS_EX_TOPMOST | win32con.WS_EX_TRANSPARENT
