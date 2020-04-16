@@ -49,11 +49,13 @@ class UpdateLabel():
         try:
             req=Request(url=url, headers=header)
             page_html=urlopen(req).read()
+
             
         except:
             self.var.set("No Internet")
-            self.win.after(1000, self.updater)
-            
+            self.win.after(5000, self.updater)
+                
+        
         soup=BeautifulSoup(page_html, 'html.parser')
         total_number=soup.findAll("div", {"class": "maincounter-number"})
         locale.setlocale(locale.LC_ALL, 'en_US.UTF8')
@@ -61,6 +63,8 @@ class UpdateLabel():
         for i in total_number:
             temp=locale.atoi(i.text.strip())
             self.ctr.append(temp)
+            
+        
             
         d0=self.ctr[0]
         d1=self.ctr[1]

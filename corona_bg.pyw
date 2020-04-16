@@ -51,8 +51,8 @@ class UpdateLabel():
             page_html=urlopen(req).read()
             
         except:
-            self.var.set("No Internet")
-            self.win.after(1000, self.updater)
+            self.var.set("No Internet\n Or server down")
+            self.win.after(5000, self.updater)
             
         soup=BeautifulSoup(page_html, 'html.parser')
         total_number=soup.findAll("div", {"class": "maincounter-number"})
