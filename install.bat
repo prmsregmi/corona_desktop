@@ -1,2 +1,1 @@
-pip install pypiwin32
-pip install bs4
+pip install -r requirements.txt
