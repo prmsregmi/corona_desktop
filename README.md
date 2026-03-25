@@ -1,20 +1,62 @@
-# corona_desktop
-A script to automatically load corona data and display in your desktop.
+# corona-desktop
 
-There is an executable(exe) already in the repo. You can directly run it.
+A lightweight Windows desktop overlay that displays live COVID-19 statistics directly on your desktop background. Stats are fetched in real-time from [Worldometers](https://www.worldometers.info/coronavirus/) and shown as a transparent, non-interactive overlay in the top-right corner of your screen.
 
-For running the script itself you can:
+## Features
 
-Make sure python is installed on your device.
-Install all the dependencies (or in windows run install.bat)
-Your internet should also be working.
-Also, this works great if you have dark themed wallpaper. You have choice to change color, follow the comments. Also there is an option available for the data to be always on top.
+- Displays live global COVID-19 case counts: Total Cases, Deaths, and Recoveries
+- Shows percentage breakdowns relative to total cases
+- Two modes: interactive window (`corona.py`) and background overlay (`corona_bg.pyw`)
+- Transparent overlay — clicks pass through, no taskbar clutter
+- Auto-refreshes every 10 seconds
+- Works best with a dark-themed wallpaper
 
-1st way
-Double click corona_bg.pyw
-This will run in background and give you stats at top right of your desktop
+## Requirements
 
-2nd way
-Run corona.py (or in windows run run.bat)
+- Windows (uses Win32 API for the transparent overlay)
+- Python 3.13+
+- [uv](https://docs.astral.sh/uv/) for dependency management
 
-Note: The data is taken from https://www.worldometers.info/
+## Installation
+
+### Using uv (recommended)
+
+```bash
+# Install uv if you haven't already
+pip install uv
+
+# Clone the repository
+git clone https://github.com/prmsregmi/corona_desktop.git
+cd corona_desktop
+
+# Install dependencies
+uv sync
+```
+
+### Running
+
+**Background overlay** (runs silently, no console window):
+```bash
+uv run pythonw corona_bg.pyw
+```
+
+**Interactive window** (with console):
+```bash
+uv run python corona.py
+```
+
+## Configuration
+
+Open `corona.py` or `corona_bg.pyw` and look for the comment markers:
+
+- **Change text color**: Find `fg='white'` in the Label definition and change to any Tkinter color
+- **Always on top**: Uncomment the `wm_attributes("-topmost", True)` line
+- **Position**: The overlay is placed at the top-right by default; adjust the geometry string to reposition
+
+## How It Works
+
+The app scrapes the global counters from Worldometers using `BeautifulSoup` and renders them as a Tkinter label with a transparent background. Windows-specific APIs (`pywin32`) are used to make the window click-through, non-activatable, and layered — so it sits on your desktop without interfering with normal use.
+
+## License
+
+MIT — see [LICENSE](LICENSE)
