@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup
 from urllib.request import urlopen, Request
-import locale, tkinter, win32api, win32con, pywintypes
+import locale, tkinter, win32api, win32con, pywintypes  # win32* are Windows-only
 
 width=win32api.GetSystemMetrics(0)
 width=int(width-0.15*width)
